@@ -43,7 +43,7 @@ class CustomListItem extends StatelessWidget {
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Image.asset('assets/images/book.jpg',
+                  Image.asset('assets/images/book.png',
                       width: 50, height: 50),
                   Constants.littleSizeBox,
                   CustomText(text: textName, textSize: 25),

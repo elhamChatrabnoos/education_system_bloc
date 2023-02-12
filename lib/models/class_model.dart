@@ -23,10 +23,10 @@ class ClassModel{
 
   Map<String, dynamic> toJson() {
     return {
-      "className": this.className,
-      "unitNumber": this.unitNumber,
-      "teacherName": this.teacherName,
-      "classSelected": this.classSelected,
+      "className": className,
+      "unitNumber": unitNumber,
+      "teacherName": teacherName,
+      "classSelected": classSelected,
     };
   }
 

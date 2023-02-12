@@ -1,4 +1,5 @@
 import 'package:education_system_bloc/controllers/class_bloc/class_bloc.dart';
+import 'package:education_system_bloc/controllers/term_bloc/term_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'home_view.dart';
@@ -10,8 +11,8 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: [
-        BlocProvider(create: (context) => ClassBloc())
-        // BlocProvider(create: (context) => TermBloc())
+        BlocProvider(create: (context) => ClassBloc()),
+        BlocProvider(create: (context) => TermBloc())
       ],
       child: HomeView(),
     );
