@@ -1,3 +1,4 @@
+import 'package:education_system_bloc/common/constants/constants.dart';
 import 'package:flutter/material.dart';
 
 import 'home_page/home_page.dart';
@@ -15,7 +16,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       theme: ThemeData(
-        primarySwatch: Colors.blue,
+        primarySwatch: Constants.primaryColor,
       ),
       home: const HomePage(),
     );

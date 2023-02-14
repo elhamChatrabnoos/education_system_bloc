@@ -1,12 +1,11 @@
 import 'package:education_system_bloc/controllers/term_bloc/term_bloc.dart';
+import 'package:education_system_bloc/views/term_pages/add_edit_term_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../common/constants/constants.dart';
 import '../../common/views/custom_list_item.dart';
 import '../../core/app_texts.dart';
-import '../../models/term_model.dart';
-
 
 class TermPage extends StatelessWidget {
   TermPage({Key? key}) : super(key: key);
@@ -28,9 +27,7 @@ class TermPage extends StatelessWidget {
   Widget _floatingButton(BuildContext context, TermState state) {
     return FloatingActionButton(
       onPressed: () {
-        termBloc.add(AddTerm());
-        print(state.termAddSuccess);
-        if (!state.termAddSuccess) {
+        if (!termBloc.onAddTerm()) {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(AppTexts.extraTermMsg)));
         }
@@ -55,27 +52,22 @@ class TermPage extends StatelessWidget {
   }
 
   Widget _eachTermItem(TermState state, int index, BuildContext context) {
-    return
-      // InkWell(
-      //     child:
-      CustomListItem(
+    return InkWell(
+      child: CustomListItem(
           onDeleteTap: () => termBloc.add(RemoveTerm(state.termList[index])),
           textName: state.termList[index].termName!,
-          // classNumber: provider.getTermUnits(provider.termList[index]).toString()),
-          classNumber: 0.toString()
-      );
-    // onTap: () =>
-    //     Navigator.push(
-    //         context,
-    //         MaterialPageRoute(
-    //             builder: (context) =>
-    //                 AddEditTerm(
-    //                   termPageProvider: provider,
-    //                   selectedTerm: provider.termList[index],
-    //                   inputClassList: provider
-    //                       .getClassOfTerm(
-    //                       provider.termList[index].classList!),
-    //                 )
-    //         )));
+          classNumber: termBloc.getTermUnits(state.termList[index]).toString()),
+      onTap: () {
+        state.termClassList =
+            termBloc.getClassOfTerm(state.termList[index].termClassList);
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => AddEditTermPage(
+                      termBloc: termBloc,
+                      selectedTerm: state.termList[index],
+                    )));
+      },
+    );
   }
 }

@@ -2,9 +2,11 @@ part of 'term_bloc.dart';
 
 class TermState {
   List<TermModel> termList = [];
+  List<ClassModel> termClassList = [];
 
   TermState(this.termList);
-  List<Object> get props => [termList];
+
+  TermState.classConstructor(this.termClassList);
 
   bool termAddSuccess = false;
 }

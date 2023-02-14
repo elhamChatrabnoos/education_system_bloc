@@ -3,14 +3,14 @@ part of 'class_bloc.dart';
 class ClassState {
 
   List<ClassModel> classList = [];
-
   ClassState(this.classList);
 
-  List<Object> get props => [classList];
+  // ClassState.unNamedCons();
 }
 
 class ClassInitial extends ClassState {
   ClassInitial() : super(classList);
+  // ClassInitial.emptyConst() : super.unNamedCons();
 }
 
 

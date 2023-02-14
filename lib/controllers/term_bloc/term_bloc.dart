@@ -12,11 +12,12 @@ part 'term_state.dart';
 
 class TermBloc extends Bloc<TermEvent, TermState> {
   TermBloc() : super(TermInitial()) {
-    on<AddTerm>(_onAddTerm);
+    // on<AddTerm>(_onAddTerm);
     on<RemoveTerm>(_onRemoveTerm);
+    on<SelectClassForTerm>(_onSelectClassForTerm);
   }
 
-  FutureOr<bool> _onAddTerm(AddTerm event, Emitter<TermState> emit) async{
+  bool onAddTerm() {
     List<ClassModel> classList = [];
     // search in termList to check target term for add
     for (int i = 0; i < state.termList.length + 1; i++) {
@@ -34,7 +35,6 @@ class TermBloc extends Bloc<TermEvent, TermState> {
         if (i < 10) {
           emit(TermState(List.from(state.termList)..add(termModel)));
           state.termAddSuccess = true;
-          print('success: ${state.termAddSuccess}');
           return state.termAddSuccess;
         }
       }
@@ -44,5 +44,72 @@ class TermBloc extends Bloc<TermEvent, TermState> {
 
   FutureOr<void> _onRemoveTerm(RemoveTerm event, Emitter<TermState> emit) {
     emit(TermState(List.from(state.termList)..remove(event.termModel)));
+  }
+
+  FutureOr<void> _onSelectClassForTerm(
+      SelectClassForTerm event, Emitter<TermState> emit) {
+    int index = state.termClassList.indexOf(event.classModel);
+    // state.termClassList = event.classListOfTerm;
+    if (index >= 0) {
+      print('index');
+      if (!event.isChecked) {
+        print('check');
+        emit(TermState.classConstructor(
+            List.from(state.termClassList)..remove(event.classModel)));
+      }
+    } else {
+      emit(TermState.classConstructor(
+          List.from(state.termClassList)..add(event.classModel)));
+      print('add ${state.termClassList.length}');
+    }
+  }
+
+  bool searchInClassOfTerm(
+      List<ClassModel> classOfTerm, ClassModel classModel) {
+    return state.termClassList.contains(classModel);
+  }
+
+  bool editeTerm(TermModel term, List<ClassModel> classList) {
+    int unitNumber = 0;
+    for (int i = 0; i < classList.length; ++i) {
+      unitNumber += classList[i].unitNumber!;
+    }
+    //// if selected unit is more than 12 or lower than 20 unit save it
+    if (unitNumber >= 12 && unitNumber <= 20) {
+      term.termClassList = classList;
+      // notifyListeners();
+      return true;
+    }
+    return false;
+  }
+
+  // void onSelectClassForTerm(
+  //     ClassModel classModel, bool isChecked, List<ClassModel> classOfTerm) {
+  //   int index = classOfTerm.indexOf(classModel);
+  //   if (index >= 0) {
+  //     if (!isChecked) {
+  //       classOfTerm.remove(classModel);
+  //     }
+  //   } else {
+  //     classOfTerm.add(classModel);
+  //   }
+  //   // notifyListeners();
+  // }
+
+  List<ClassModel> getClassOfTerm(List<ClassModel> classList) {
+    List<ClassModel> listOfClass = [];
+
+    for (int i = 0; i < classList.length; i++) {
+      listOfClass.add(classList[i]);
+    }
+    return listOfClass;
+  }
+
+  int getTermUnits(TermModel termModel) {
+    int termUnits = 0;
+    for (var i = 0; i < termModel.termClassList.length; ++i) {
+      termUnits += termModel.termClassList[i].unitNumber!;
+    }
+    return termUnits;
   }
 }

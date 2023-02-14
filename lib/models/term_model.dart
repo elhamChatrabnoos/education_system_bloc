@@ -2,24 +2,23 @@ import 'class_model.dart';
 
 class TermModel {
   String? termName;
-  List<ClassModel>? termClassList;
+  List<ClassModel> _termClassList;
 
-  TermModel({this.termName, this.termClassList});
 
-  TermModel copyWith({
-    String? termName,
-    List<ClassModel>? termClassList,
-  }) {
-    return TermModel(
-      termName: termName ?? this.termName,
-      termClassList: termClassList ?? this.termClassList,
-    );
+  set termClassList(List<ClassModel> value) {
+    _termClassList = value;
   }
+
+  List<ClassModel> get termClassList => _termClassList;
+
+  TermModel({this.termName, List<ClassModel>? termClassList}) :
+        _termClassList = termClassList!;
+
 
   Map<String, dynamic> toJson() {
     return {
       "termName": termName,
-      "termClassList": termClassList!.map((i) => i.toJson()).toList(),
+      "termClassList": _termClassList.map((i) => i.toJson()).toList(),
     };
   }
 
@@ -29,11 +28,6 @@ class TermModel {
         termClassList: List.of(json["termClassList"]));
   }
 
-  @override
-  List<Object> get props => [
-        termName!,
-        termClassList!,
-      ];
 }
 
 

@@ -9,23 +9,29 @@ part 'class_event.dart';
 part 'class_state.dart';
 
 class ClassBloc extends Bloc<ClassEvent, ClassState> {
+
   ClassBloc() : super(ClassInitial()) {
     on<RemoveClass>(_onRemoveClass);
     on<AddClass>(_onAddClass);
     on<UpdateClass>(_onUpdateClass);
   }
 
+  // ClassBloc.emptyConst() : super(ClassInitial.emptyConst());
+
   FutureOr<void> _onRemoveClass(RemoveClass event, Emitter<ClassState> emit) {
-    emit(ClassState(List.from(state.classList)..remove(event.classModel)));
+    List<ClassModel> classList = state.classList;
+    emit(ClassState(List.from(classList)..remove(event.classModel)));
   }
 
   FutureOr<void> _onAddClass(AddClass event, Emitter<ClassState> emit) {
-    emit(ClassState(List.from(state.classList)..add(event.classModel)));
+    List<ClassModel> classList = state.classList;
+    emit(ClassState(List.from(classList)..add(event.classModel)));
   }
 
   FutureOr<void> _onUpdateClass(UpdateClass event, Emitter<ClassState> emit) {
-    state.classList[event.classIndex] = event.classModel;
-    emit(ClassState(state.classList));
+    List<ClassModel> classList = state.classList;
+    classList[event.classIndex] = event.classModel;
+    emit(ClassState(classList));
   }
 
 

@@ -68,13 +68,14 @@ class ClassPage extends StatelessWidget {
 
 Future<void> _showEditDialog(
     BuildContext context, int index, ClassState state) {
+  List<ClassModel> classList = state.classList;
   return showDialog(
       context: context,
       builder: (context) => CustomDialog(
             isAddAction: false,
-            className: state.classList[index].className,
-            classTeacher: state.classList[index].teacherName,
-            classUnit: state.classList[index].unitNumber,
+            className: classList[index].className,
+            classTeacher: classList[index].teacherName,
+            classUnit: classList[index].unitNumber,
           )).then((value) {
     ClassModel editedClass = ClassModel(
       className: value['className'],
