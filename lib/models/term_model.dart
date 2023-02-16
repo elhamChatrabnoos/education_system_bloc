@@ -4,7 +4,6 @@ class TermModel {
   String? termName;
   List<ClassModel> _termClassList;
 
-
   set termClassList(List<ClassModel> value) {
     _termClassList = value;
   }

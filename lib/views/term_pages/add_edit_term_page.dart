@@ -1,10 +1,8 @@
-import 'package:education_system_bloc/controllers/class_bloc/class_bloc.dart';
 import 'package:education_system_bloc/views/term_pages/add_edit_term_view.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../controllers/term_bloc/term_bloc.dart';
-import '../../models/class_model.dart';
 import '../../models/term_model.dart';
 
 class AddEditTermPage extends StatelessWidget {

@@ -16,7 +16,6 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
     on<UpdateClass>(_onUpdateClass);
   }
 
-  // ClassBloc.emptyConst() : super(ClassInitial.emptyConst());
 
   FutureOr<void> _onRemoveClass(RemoveClass event, Emitter<ClassState> emit) {
     List<ClassModel> classList = state.classList;

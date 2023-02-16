@@ -12,7 +12,6 @@ part 'term_state.dart';
 
 class TermBloc extends Bloc<TermEvent, TermState> {
   TermBloc() : super(TermInitial()) {
-    // on<AddTerm>(_onAddTerm);
     on<RemoveTerm>(_onRemoveTerm);
     on<SelectClassForTerm>(_onSelectClassForTerm);
   }
@@ -49,20 +48,17 @@ class TermBloc extends Bloc<TermEvent, TermState> {
   FutureOr<void> _onSelectClassForTerm(
       SelectClassForTerm event, Emitter<TermState> emit) {
     int index = state.termClassList.indexOf(event.classModel);
-    // state.termClassList = event.classListOfTerm;
     if (index >= 0) {
-      print('index');
       if (!event.isChecked) {
-        print('check');
         emit(TermState.classConstructor(
             List.from(state.termClassList)..remove(event.classModel)));
       }
     } else {
       emit(TermState.classConstructor(
           List.from(state.termClassList)..add(event.classModel)));
-      print('add ${state.termClassList.length}');
     }
   }
+
 
   bool searchInClassOfTerm(
       List<ClassModel> classOfTerm, ClassModel classModel) {
@@ -83,19 +79,6 @@ class TermBloc extends Bloc<TermEvent, TermState> {
     return false;
   }
 
-  // void onSelectClassForTerm(
-  //     ClassModel classModel, bool isChecked, List<ClassModel> classOfTerm) {
-  //   int index = classOfTerm.indexOf(classModel);
-  //   if (index >= 0) {
-  //     if (!isChecked) {
-  //       classOfTerm.remove(classModel);
-  //     }
-  //   } else {
-  //     classOfTerm.add(classModel);
-  //   }
-  //   // notifyListeners();
-  // }
-
   List<ClassModel> getClassOfTerm(List<ClassModel> classList) {
     List<ClassModel> listOfClass = [];
 
@@ -112,4 +95,5 @@ class TermBloc extends Bloc<TermEvent, TermState> {
     }
     return termUnits;
   }
+
 }

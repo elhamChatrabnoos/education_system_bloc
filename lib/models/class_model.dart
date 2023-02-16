@@ -38,16 +38,6 @@ class ClassModel{
       classSelected: json["classSelected"].toLowerCase() == 'true',
     );
   }
-
-  @override
-  List<Object> get props => [
-    className!,
-    unitNumber!,
-    teacherName!,
-    classSelected!,
-  ];
-
-
 }
 
 List<ClassModel> classList = [

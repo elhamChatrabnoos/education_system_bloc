@@ -11,7 +11,6 @@ class AddClass extends ClassEvent {
 class RemoveClass extends ClassEvent {
   final ClassModel classModel;
   RemoveClass(this.classModel);
-
 }
 
 class UpdateClass extends ClassEvent {
