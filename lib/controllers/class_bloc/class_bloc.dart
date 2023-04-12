@@ -18,17 +18,21 @@ class ClassBloc extends Bloc<ClassEvent, ClassState> {
 
 
   FutureOr<void> _onRemoveClass(RemoveClass event, Emitter<ClassState> emit) {
-    List<ClassModel> classList = state.classList;
-    emit(ClassState(List.from(classList)..remove(event.classModel)));
+    classList = state.classList;
+    classList.remove(event.classModel);
+    // emit(ClassState(List.from(classList)..remove(event.classModel)));
+    emit(ClassState(classList));
   }
 
   FutureOr<void> _onAddClass(AddClass event, Emitter<ClassState> emit) {
-    List<ClassModel> classList = state.classList;
-    emit(ClassState(List.from(classList)..add(event.classModel)));
+    classList = state.classList;
+    classList.add(event.classModel);
+    // emit(ClassState(List.from(classList)..add(event.classModel)));
+    emit(ClassState(classList));
   }
 
   FutureOr<void> _onUpdateClass(UpdateClass event, Emitter<ClassState> emit) {
-    List<ClassModel> classList = state.classList;
+    classList = state.classList;
     classList[event.classIndex] = event.classModel;
     emit(ClassState(classList));
   }

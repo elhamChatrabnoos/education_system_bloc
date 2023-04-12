@@ -9,7 +9,6 @@ class AddTerm extends TermEvent {
 
 class RemoveTerm extends TermEvent {
   final TermModel termModel;
-
   RemoveTerm(this.termModel);
 }
 

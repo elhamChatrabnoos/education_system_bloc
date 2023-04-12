@@ -1,7 +1,6 @@
 import 'package:education_system_bloc/controllers/class_bloc/class_bloc.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:provider/provider.dart';
 
 import '../../common/views/custom_dialog.dart';
 import '../../common/views/custom_list_item_class.dart';
